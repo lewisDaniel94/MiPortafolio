@@ -1,0 +1,49 @@
+
+var ftGUID_4200867="541919A8B35E47";
+var ftConfID_4200867="0";
+var ftParams_4200867="ftOBA=1&ft_agentEnv=0&ft_referrer=https%3A%2F%2Fe047fd3ee5e8becd0f77487a30276fb1.safeframe.googlesyndication.com%2Fsafeframe%2F1-0-40%2Fhtml%2Fcontainer.html&us_privacy=${US_PRIVACY}&cachebuster=413733.69255624316&ft_dv=%5B%25ft_dv%25%5D";
+var ftKeyword_4200867="";
+var ftCustom_4200867="";
+var ftSection_4200867="";
+var ftSegment_4200867="afr5,w2b";
+var ftSegmentList_4200867=[{s:'afr5'},{s:'w2b'}];
+var ftRuleMatch_4200867="0";
+var ftTimestamp_4200867="1683346776";
+var ftGeoC2_4200867="ar";
+var ftGeoState_4200867="b";
+var ftGeoCity_4200867="caseros";
+var ftISP_4200867="telecentro s.a.";
+var ftSpeed_4200867="broadband";
+var ftConnType_4200867="wifi";
+var ftDMA_4200867="-1";
+var ftLong_4200867="-58.56";
+var ftLat_4200867="-34.6";
+var ftPostal_4200867="b1678 guy";
+var ftTimeZone_4200867="-300";
+var ftMobileCarrier_4200867="";
+var ftImp4200867 = {};
+ftImp4200867.privacy = "x";
+ftImp4200867.guidAge = "185";
+ftImp4200867.impID = "7112A209-400B-21B9-74F5-A72AADF300CD";
+ftImp4200867.duid = "FT:541919A8B35E47";
+
+ftImp4200867.ft_tpplid = "";
+ftImp4200867.ft_c = {};
+ftImp4200867.gdpr = "";
+ftImp4200867.gdpr_consent = "";
+ftImp4200867.gdpr_pd = "";
+ftImp4200867.oob_consent = "";
+ftImp4200867.gdprStoredConsent = "";
+ftImp4200867.us_privacy = "!!US_PRIVACY!";
+
+ftImp4200867.jsAppend = "1";
+(function(){
+    var tag = document.getElementById('ft_servedby_4200867') || (function(s){
+    	return s[s.length-1];
+    }(document.getElementsByTagName('script'))),
+           js = document.createElement('script');
+    js.src =
+"https://cdn.flashtalking.com/xre/420/4200867/4267111/js/j-4200867-4267111.js";
+    js.id = "ftscript_m4200867";
+    tag.parentNode.insertBefore(js, tag);
+}());
