@@ -1,3 +1,14 @@
+/* Control estricto para evitar desbordes y zoom lateral en móviles */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html {
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden !important;
+  scroll-behavior: smooth;
+}
 
 body {
   font-family: "Open Sans", sans-serif;
@@ -5,6 +16,10 @@ body {
   color: #fff;
   position: relative;
   background: transparent;
+  width: 100%;
+  min-height: 100vh;
+  overflow-x: hidden !important;
+  -webkit-text-size-adjust: 100%;
 }
 
 body::before {
@@ -17,6 +32,7 @@ body::before {
   top: 0;
   height: 100vh;
   z-index: -1;
+  width: 100vw;
 }
 
 @media (min-width: 1024px) {
@@ -44,9 +60,15 @@ h6 {
   font-family: "Raleway", sans-serif;
 }
 
-/*--------------------------------------------------------------
+/* Blindaje de imágenes y contenedores para que no rompan la pantalla */
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* --------------------------------------------------------------
 # Header
---------------------------------------------------------------*/
+-------------------------------------------------------------- */
 #header {
   transition: ease-in-out 0.3s;
   position: relative;
@@ -55,6 +77,7 @@ h6 {
   align-items: center;
   z-index: 997;
   overflow-y: auto;
+  width: 100%;
 }
 
 #header * {
@@ -135,6 +158,7 @@ h6 {
     display: flex;
     flex-direction: column;
     align-items: center;
+    width: 100%;
   }
 }
 
@@ -146,6 +170,7 @@ h6 {
   top: 0;
   right: 0;
   background: rgba(0, 0, 0, 0.9);
+  width: 100%;
 }
 
 #header.header-top .social-links,
@@ -161,6 +186,7 @@ h6 {
 #header.header-top .container {
   display: flex;
   align-items: center;
+  width: 100%;
 }
 
 #header.header-top .navbar {
@@ -177,12 +203,9 @@ h6 {
   }
 }
 
-/*--------------------------------------------------------------
+/* --------------------------------------------------------------
 # Navigation Menu
---------------------------------------------------------------*/
-/**
-* Desktop Navigation 
-*/
+-------------------------------------------------------------- */
 .navbar {
   padding: 0;
   margin-top: 35px;
@@ -234,7 +257,6 @@ h6 {
   left: 0;
   background-color: #66a6ff;
   visibility: hidden;
-  width: 0px;
   transition: all 0.3s ease-in-out 0s;
 }
 
@@ -265,6 +287,7 @@ h6 {
   position: fixed;
   right: 15px;
   top: 15px;
+  z-index: 1000;
 }
 
 @media (max-width: 991px) {
@@ -288,6 +311,7 @@ h6 {
   transition: 0.3s;
   z-index: 999;
   margin-top: 0;
+  width: 100%;
 }
 
 .navbar-mobile .mobile-nav-toggle {
@@ -323,18 +347,23 @@ h6 {
   position: relative;
 }
 
-/*--------------------------------------------------------------
+/* --------------------------------------------------------------
 # Sections General
---------------------------------------------------------------*/
+-------------------------------------------------------------- */
 section {
   overflow: hidden;
   position: absolute;
   width: 100%;
+  max-width: 100%;
   top: 140px;
   bottom: 100%;
   opacity: 0;
   transition: ease-in-out 0.4s;
   z-index: 2;
+  left: 0;
+  right: 0;
+  padding-left: 15px;
+  padding-right: 15px;
 }
 
 section.section-show {
@@ -347,11 +376,15 @@ section.section-show {
 section .container {
   background: rgba(0, 0, 0, 0.9);
   padding: 30px;
+  width: 100%;
+  max-width: 100%;
 }
 
 @media (max-width: 768px) {
   section {
     top: 120px;
+    padding-left: 10px;
+    padding-right: 10px;
   }
 
   section.section-show {
@@ -388,11 +421,12 @@ section .container {
   text-transform: uppercase;
   font-family: "Poppins", sans-serif;
   color: #fff;
+  word-break: break-word;
 }
 
-/*--------------------------------------------------------------
+/* --------------------------------------------------------------
 # About
---------------------------------------------------------------*/
+-------------------------------------------------------------- */
 .about-me .content h3 {
   font-weight: 700;
   font-size: 26px;
@@ -408,6 +442,7 @@ section .container {
   margin-bottom: 20px;
   display: flex;
   align-items: center;
+  word-break: break-word;
 }
 
 .about-me .content ul strong {
@@ -425,9 +460,9 @@ section .container {
   margin-bottom: 0;
 }
 
-/*--------------------------------------------------------------
+/* --------------------------------------------------------------
 # Counts
---------------------------------------------------------------*/
+-------------------------------------------------------------- */
 .counts {
   padding: 70px 0 60px;
 }
@@ -467,14 +502,15 @@ section .container {
   font-size: 14px;
 }
 
-/*--------------------------------------------------------------
+/* --------------------------------------------------------------
 # Skills
---------------------------------------------------------------*/
+-------------------------------------------------------------- */
 .skills .progress {
   height: 60px;
   display: block;
   background: none;
   border-radius: 0;
+  width: 100%;
 }
 
 .skills .progress .skill {
@@ -494,6 +530,7 @@ section .container {
 
 .skills .progress-bar-wrap {
   background: rgba(255, 255, 255, 0.2);
+  width: 100%;
 }
 
 .skills .progress-bar {
@@ -503,15 +540,16 @@ section .container {
   background-color: #66a6ff;
 }
 
-/*--------------------------------------------------------------
+/* --------------------------------------------------------------
 # Interests
---------------------------------------------------------------*/
+-------------------------------------------------------------- */
 .interests .icon-box {
   display: flex;
   align-items: center;
   padding: 20px;
   background: rgba(255, 255, 255, 0.08);
   transition: ease-in-out 0.3s;
+  width: 100%;
 }
 
 .interests .icon-box i {
@@ -533,9 +571,9 @@ section .container {
   background: rgba(255, 255, 255, 0.12);
 }
 
-/*--------------------------------------------------------------
+/* --------------------------------------------------------------
 # Resume
---------------------------------------------------------------*/
+-------------------------------------------------------------- */
 .resume .resume-title {
   font-size: 26px;
   font-weight: 700;
@@ -549,6 +587,7 @@ section .container {
   margin-top: -2px;
   border-left: 2px solid rgba(255, 255, 255, 0.2);
   position: relative;
+  width: 100%;
 }
 
 .resume .resume-item h4 {
@@ -559,6 +598,7 @@ section .container {
   font-family: "Poppins", sans-serif;
   color: #66a6ff;
   margin-bottom: 10px;
+  word-break: break-word;
 }
 
 .resume .resume-item h5 {
@@ -572,6 +612,7 @@ section .container {
 
 .resume .resume-item ul {
   padding-left: 20px;
+  word-break: break-word;
 }
 
 .resume .resume-item ul li {
@@ -594,15 +635,15 @@ section .container {
   border: 2px solid #66a6ff;
 }
 
-
-/*--------------------------------------------------------------
+/* --------------------------------------------------------------
 # Contact
---------------------------------------------------------------*/
+-------------------------------------------------------------- */
 .contact .info-box {
   color: #444444;
   padding: 20px;
   width: 100%;
   background: rgba(255, 255, 255, 0.08);
+  word-break: break-word;
 }
 
 .contact .info-box i.bx {
@@ -632,6 +673,7 @@ section .container {
 .contact .info-box .social-links {
   margin: 5px 0 0 68px;
   display: flex;
+  flex-wrap: wrap;
 }
 
 .contact .info-box .social-links a {
@@ -640,6 +682,7 @@ section .container {
   color: #fff;
   line-height: 1;
   margin-right: 12px;
+  margin-bottom: 8px;
   transition: 0.3s;
 }
 
@@ -650,24 +693,19 @@ section .container {
 .contact .php-email-form {
   padding: 30px;
   background: rgba(255, 255, 255, 0.08);
+  width: 100%;
 }
 
 .contact .php-email-form .error-message {
   display: none;
-  background: rgba(255, 255, 255, 0.08);
   background: #ed3c0d;
   text-align: left;
   padding: 15px;
   font-weight: 600;
 }
 
-.contact .php-email-form .error-message br+br {
-  margin-top: 25px;
-}
-
 .contact .php-email-form .sent-message {
   display: none;
-  background: rgba(255, 255, 255, 0.08);
   background: #66a6ff;
   text-align: center;
   padding: 15px;
@@ -676,7 +714,6 @@ section .container {
 
 .contact .php-email-form .loading {
   display: none;
-  background: rgba(255, 255, 255, 0.08);
   text-align: center;
   padding: 15px;
 }
@@ -702,17 +739,12 @@ section .container {
   border: 0;
   transition: 0.3s;
   color: #fff;
+  width: 100%;
 }
 
 .contact .php-email-form input:focus,
 .contact .php-email-form textarea:focus {
   background-color: rgba(255, 255, 255, 0.11);
-}
-
-.contact .php-email-form input::-moz-placeholder,
-.contact .php-email-form textarea::-moz-placeholder {
-  color: rgba(255, 255, 255, 0.3);
-  opacity: 1;
 }
 
 .contact .php-email-form input::placeholder,
@@ -746,7 +778,6 @@ section .container {
   0% {
     transform: rotate(0deg);
   }
-
   100% {
     transform: rotate(360deg);
   }
