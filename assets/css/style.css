@@ -42,7 +42,7 @@ body {
   position: relative;
 }
 
-/* Fondo estático y fijo blindado para que no cause scroll lateral ni movimiento */
+/* Fondo estático y fijo absoluto (totalmente inmóvil en celulares y PC) */
 body::before {
   content: "";
   position: fixed;
@@ -51,9 +51,16 @@ body::before {
   width: 100vw;
   height: 100vh;
   z-index: -2;
-  background: #040404 url("../img/Fondo_Negro_5.png") top right / cover no-repeat;
+  background-color: #040404;
+  background-image: url("../img/Fondo_Negro_5.png");
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  -webkit-background-size: cover;
   pointer-events: none;
+  transform: translateZ(0);
 }
+
 body::after {
   content: "";
   position: fixed;
@@ -64,6 +71,7 @@ body::after {
   z-index: -1;
   background: linear-gradient(180deg, rgba(4, 4, 4, 0.45), rgba(4, 4, 4, 0.8));
   pointer-events: none;
+  transform: translateZ(0);
 }
 
 img { max-width: 100%; height: auto; display: block; }
@@ -436,7 +444,7 @@ ul { margin: 0; padding: 0; }
   .header-cta { display: none; }
   .menu-toggle { display: flex; }
 
-  /* Menú desplegable móvil completamente fijo (absoluto/fijo sin empujar la pantalla ni causar desplazamiento) */
+  /* Menú desplegable móvil completamente fijo */
   .navbar {
     position: fixed; 
     top: var(--header-h); 
