@@ -42,35 +42,39 @@ body {
   position: relative;
 }
 
-/* FONDOS FIJOS ABSOLUTOS (Inmóviles en cualquier dispositivo móvil) */
-body::before {
-  content: "";
-  position: absolute;
+/* ==========================================================
+   CONTENEDOR DE FONDO ESTÁTICO E INMÓVIL EN MÓVILES
+   ========================================================== */
+.bg-fixed-container {
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
-  height: 100%;
-  min-height: 100vh;
+  height: 100vh;
+  height: 100dvh; /* Adapta dinámicamente el alto en móviles sin tirones */
   z-index: -2;
   background-color: #040404;
   background-image: url("../img/Fondo_Negro_5.png");
   background-repeat: no-repeat;
-  background-position: center top;
+  background-position: center center;
   background-size: cover;
-  background-attachment: fixed; /* Fuerza absoluta de fijación en navegadores móviles */
+  -webkit-background-size: cover;
   pointer-events: none;
+  transform: translate3d(0, 0, 0); /* Aceleración por GPU */
+  will-change: transform;
 }
 
-body::after {
-  content: "";
+.bg-fixed-overlay {
   position: fixed;
   top: 0;
   left: 0;
-  width: 100vw;
+  width: 100%;
   height: 100vh;
+  height: 100dvh;
   z-index: -1;
   background: linear-gradient(180deg, rgba(4, 4, 4, 0.45), rgba(4, 4, 4, 0.8));
   pointer-events: none;
+  transform: translate3d(0, 0, 0);
 }
 
 img { max-width: 100%; height: auto; display: block; }
@@ -438,12 +442,11 @@ ul { margin: 0; padding: 0; }
 .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.8s var(--ease), transform 0.8s var(--ease); transition-delay: var(--d, 0s); }
 .reveal.in { opacity: 1; transform: none; }
 
-/* ---------- Responsive y Menú Fijo sin movimiento ---------- */
+/* ---------- Responsive ---------- */
 @media (max-width: 991px) {
   .header-cta { display: none; }
   .menu-toggle { display: flex; }
 
-  /* Menú desplegable móvil completamente fijo */
   .navbar {
     position: fixed; 
     top: var(--header-h); 
@@ -491,12 +494,10 @@ ul { margin: 0; padding: 0; }
   .scroll-hint { display: none; }
 }
 
-/* Accesibilidad: respeta "reducir movimiento" */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
   .reveal { opacity: 1; transform: none; }
   .bar-fill { transition: none; }
 }
 
-/* Enlaces múltiples dentro de una tarjeta de proyecto */
 .project-links { display: flex; flex-wrap: wrap; gap: 8px 20px; }
