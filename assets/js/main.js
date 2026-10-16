@@ -33,11 +33,14 @@
     navbar.classList.toggle("open", open);
     menuToggle.classList.toggle("open", open);
     menuToggle.setAttribute("aria-expanded", String(open));
-    document.body.style.overflow = open ? "hidden" : "";
+    // Se bloquea el scroll desde <html> (no desde <body>) para no alterar el fondo fijo
+    document.documentElement.classList.toggle("menu-open", open);
   };
   menuToggle.addEventListener("click", () => setMenu(!navbar.classList.contains("open")));
   $$(".nav-link").forEach((a) => a.addEventListener("click", () => setMenu(false)));
   document.addEventListener("keydown", (e) => { if (e.key === "Escape") setMenu(false); });
+  // Si se agranda la pantalla con el menú abierto, se cierra solo
+  window.addEventListener("resize", () => { if (window.innerWidth > 991) setMenu(false); });
 
   /* ---------- Scroll: header, progreso, volver arriba ---------- */
   const header = $("#header");
