@@ -1,6 +1,6 @@
 /* ==========================================================
    Portafolio — Lewis Habano
-   Versión optimizada: Fondo fijo estático, menú móvil fijo y sin zoom lateral
+   Versión corregida definitiva: Fondo 100% inmóvil y estático en móviles
    ========================================================== */
 
 :root {
@@ -42,23 +42,23 @@ body {
   position: relative;
 }
 
-/* Fondo estático y fijo absoluto (totalmente inmóvil en celulares y PC) */
+/* FONDOS FIJOS ABSOLUTOS (Inmóviles en cualquier dispositivo móvil) */
 body::before {
   content: "";
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 0;
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
+  min-height: 100vh;
   z-index: -2;
   background-color: #040404;
   background-image: url("../img/Fondo_Negro_5.png");
   background-repeat: no-repeat;
-  background-position: center center;
+  background-position: center top;
   background-size: cover;
-  -webkit-background-size: cover;
+  background-attachment: fixed; /* Fuerza absoluta de fijación en navegadores móviles */
   pointer-events: none;
-  transform: translateZ(0);
 }
 
 body::after {
@@ -71,7 +71,6 @@ body::after {
   z-index: -1;
   background: linear-gradient(180deg, rgba(4, 4, 4, 0.45), rgba(4, 4, 4, 0.8));
   pointer-events: none;
-  transform: translateZ(0);
 }
 
 img { max-width: 100%; height: auto; display: block; }
