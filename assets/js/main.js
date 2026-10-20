@@ -10,7 +10,7 @@
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   // Contacto (WhatsApp sin el signo +, solo números con código de país)
-  const WHATSAPP = "584126613828";
+  const WHATSAPP = "584126613818";
   const EMAIL = "habanolewis@gmail.com";
 
   /* ---------- Año automático ---------- */
@@ -114,7 +114,7 @@
       "Desarrollador Front End Junior",
       "Sitios web para negocios reales",
       "Sistemas de citas y pedidos",
-      "HTML · CSS · JavaScript · Angular"
+      "HTML · CSS · JavaScript"
     ];
     let w = 0, c = 0, deleting = false;
     const type = () => {
