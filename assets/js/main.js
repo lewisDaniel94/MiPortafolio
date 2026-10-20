@@ -13,6 +13,19 @@
   const WHATSAPP = "584126613818";
   const EMAIL = "habanolewis@gmail.com";
 
+  /* ---------- Pantalla fija: sin zoom (pellizco, doble toque ni Ctrl + rueda) ---------- */
+  ["gesturestart", "gesturechange", "gestureend"].forEach((ev) =>
+    document.addEventListener(ev, (e) => e.preventDefault(), { passive: false })
+  );
+  document.addEventListener("touchmove", (e) => { if (e.touches.length > 1) e.preventDefault(); }, { passive: false });
+  let lastTouchEnd = 0;
+  document.addEventListener("touchend", (e) => {
+    const now = Date.now();
+    if (now - lastTouchEnd <= 300) e.preventDefault(); // doble toque
+    lastTouchEnd = now;
+  }, { passive: false });
+  window.addEventListener("wheel", (e) => { if (e.ctrlKey) e.preventDefault(); }, { passive: false });
+
   /* ---------- Año automático ---------- */
   const yearEl = $("#year");
   if (yearEl) yearEl.textContent = new Date().getFullYear();

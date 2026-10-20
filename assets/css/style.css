@@ -32,6 +32,8 @@ html {
   -webkit-text-size-adjust: 100%;
   background: var(--bg);
   overflow-x: hidden;
+  /* Bloquea el zoom por pellizco y doble toque: solo permite desplazarse */
+  touch-action: pan-x pan-y;
 }
 html.menu-open { overflow: hidden; }
 
@@ -44,6 +46,8 @@ body {
   color: var(--text);
   background: transparent;
   overflow-x: clip;
+  touch-action: pan-x pan-y;
+  -ms-touch-action: pan-x pan-y;
 }
 
 /* ---------- Fondo solo con CSS (fijo, liviano) ---------- */
