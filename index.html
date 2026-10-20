@@ -3,19 +3,40 @@
 
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <!-- Viewport sin bloqueo de zoom: mejor accesibilidad y mejor puntaje en Lighthouse -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script>document.documentElement.classList.add("js");</script>
 
-  <title>Lewis Habano | Front End Developer</title>
-  <meta name="description" content="Portafolio de Lewis Habano, Junior Front End Developer en Buenos Aires. Proyectos web, habilidades y contacto.">
-  <meta name="keywords" content="Front End, Developer, HTML, CSS, JavaScript, Angular, Buenos Aires, portafolio">
-  <meta name="author" content="Lewis Habano"> 
-  <meta name="theme-color" content="#040404"> 
+  <title>Lewis Habano | Desarrollador Front End Junior en Buenos Aires</title>
+  <meta name="description" content="Lewis Habano, desarrollador Front End junior en Buenos Aires. HTML, CSS, JavaScript y Angular. 8 proyectos online: sistemas de citas, pedidos, menús digitales y sitios para negocios. Disponible para trabajar.">
+  <meta name="keywords" content="Front End Developer, desarrollador web, junior, HTML, CSS, JavaScript, Angular, Buenos Aires, portafolio, sistemas de citas, sitios web para negocios">
+  <meta name="author" content="Lewis Habano">
+  <meta name="theme-color" content="#0b1210">
+  <link rel="canonical" href="https://mi-portafolio-kohl.vercel.app/">
 
-  <!-- Open Graph -->
-  <meta property="og:title" content="Lewis Habano | Front End Developer">
-  <meta property="og:description" content="Portafolio web: proyectos, habilidades y formación de un Junior Front End Developer.">
+  <!-- Open Graph / redes -->
+  <meta property="og:title" content="Lewis Habano | Desarrollador Front End Junior">
+  <meta property="og:description" content="Sitios web rápidos y sistemas de citas y pedidos para negocios reales. Mirá mis 8 proyectos online.">
   <meta property="og:type" content="website">
-  <meta property="og:image" content="assets/img/PERFIL.PNG">
+  <meta property="og:url" content="https://mi-portafolio-kohl.vercel.app/">
+  <meta property="og:locale" content="es_AR">
+  <meta property="og:image" content="https://mi-portafolio-kohl.vercel.app/assets/img/PERFIL.PNG">
+  <meta name="twitter:card" content="summary">
+
+  <!-- Datos estructurados: ayudan a Google a entender quién sos -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Lewis Habano",
+    "jobTitle": "Front End Developer (Junior)",
+    "url": "https://mi-portafolio-kohl.vercel.app/",
+    "email": "mailto:habanolewis@gmail.com",
+    "address": { "@type": "PostalAddress", "addressLocality": "Buenos Aires", "addressCountry": "AR" },
+    "sameAs": ["https://www.linkedin.com/in/lewis-habano-377702239"],
+    "knowsAbout": ["HTML", "CSS", "JavaScript", "Angular", "Diseño web responsive"]
+  }
+  </script>
 
   <!-- Favicons -->
   <link href="assets/img/letra-l.png" rel="icon">
@@ -24,7 +45,7 @@
   <!-- Fuentes e íconos -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
 
   <!-- Estilos -->
@@ -33,17 +54,16 @@
 
 <body>
 
-  <!-- Contenedores independientes para fijar el fondo de forma estática en móviles y PC -->
-  <div class="bg-fixed-container" aria-hidden="true"></div>
-  <div class="bg-fixed-overlay" aria-hidden="true"></div>
+  <a class="skip-link" href="#main">Saltar al contenido</a>
 
+  <!-- Fondo hecho solo con CSS (ya no depende de una imagen pesada) -->
+  <div class="bg-layer" aria-hidden="true"></div>
   <div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
-  <div class="cursor-glow" id="cursorGlow" aria-hidden="true"></div>
 
   <!-- ======= Header ======= -->
   <header id="header" class="site-header">
     <div class="wrap header-inner">
-      <a href="#inicio" class="brand" aria-label="Ir al inicio">
+      <a href="#inicio" class="brand" aria-label="Lewis Habano, ir al inicio">
         <span class="brand-mark">L</span>
         <span class="brand-name">Lewis Habano</span>
       </a>
@@ -51,9 +71,10 @@
       <nav id="navbar" class="navbar" aria-label="Navegación principal">
         <ul>
           <li><a class="nav-link active" href="#inicio">Inicio</a></li>
-          <li><a class="nav-link" href="#about">Sobre mí</a></li>
-          <li><a class="nav-link" href="#skills">Skills</a></li>
           <li><a class="nav-link" href="#proyectos">Proyectos</a></li>
+          <li><a class="nav-link" href="#skills">Skills</a></li>
+          <li><a class="nav-link" href="#servicios">Servicios</a></li>
+          <li><a class="nav-link" href="#about">Sobre mí</a></li>
           <li><a class="nav-link" href="#trayectoria">Trayectoria</a></li>
           <li><a class="nav-link" href="#contact">Contacto</a></li>
         </ul>
@@ -67,102 +88,145 @@
     </div>
   </header>
 
-  <main>
+  <main id="main">
 
     <!-- ======= Hero ======= -->
     <section id="inicio" class="hero">
-      <div class="wrap hero-grid">
+      <div class="wrap">
+        <div class="hero-grid">
 
-        <div class="hero-text reveal">
-          <span class="badge-available"><span class="dot"></span> Disponible para nuevos proyectos</span>
-          <p class="hero-hello">Hola, soy</p>
-          <h1>Lewis <span class="grad">Habano</span></h1>
-          <h2 class="hero-role">
-            <span id="typed" aria-live="polite"></span><span class="caret" aria-hidden="true"></span>
-          </h2>
-          <p class="hero-desc">
-            Construyo sitios web modernos, rápidos y fáciles de usar. Estoy en constante formación en
-            desarrollo Front End y vivo en Buenos Aires, Argentina.
-          </p>
+          <div class="hero-text reveal">
+            <span class="badge-available"><span class="dot"></span> Disponible para trabajar · Buenos Aires, Argentina</span>
+            <h1>Lewis <span class="grad">Habano</span></h1>
+            <h2 class="hero-role" aria-label="Desarrollador Front End Junior">
+              <span id="typed" aria-hidden="true">Desarrollador Front End Junior</span><span class="caret" aria-hidden="true"></span>
+            </h2>
+            <p class="hero-desc">
+              Construyo sitios web rápidos y sistemas de citas y pedidos para negocios reales:
+              ya tengo <strong>8 proyectos online</strong> funcionando. Busco mi primera oportunidad
+              como Front End Developer en un equipo donde aportar y seguir creciendo.
+            </p>
 
-          <div class="hero-actions">
-            <a href="#proyectos" class="btn btn-primary"><i class="bi bi-grid-1x2"></i> Ver proyectos</a>
-            <a href="#contact" class="btn btn-ghost"><i class="bi bi-chat-dots"></i> Contactarme</a>
+            <div class="hero-actions">
+              <a href="#proyectos" class="btn btn-primary"><i class="bi bi-grid-1x2" aria-hidden="true"></i> Ver proyectos</a>
+              <a href="https://wa.me/584126613828?text=Hola%20Lewis%2C%20vi%20tu%20portafolio%20y%20quisiera%20hablar%20con%20vos."
+                 target="_blank" rel="noopener" class="btn btn-ghost"><i class="bi bi-whatsapp" aria-hidden="true"></i> Escribime por WhatsApp</a>
+            </div>
+
+            <div class="social-links">
+              <a href="https://www.linkedin.com/in/lewis-habano-377702239" target="_blank" rel="noopener" aria-label="LinkedIn de Lewis Habano"><i class="bi bi-linkedin" aria-hidden="true"></i></a>
+              <a href="https://wa.me/584126613828?text=Hola%20Lewis%2C%20vi%20tu%20portafolio%20y%20quisiera%20hablar%20con%20vos." target="_blank" rel="noopener" aria-label="WhatsApp"><i class="bi bi-whatsapp" aria-hidden="true"></i></a>
+              <a href="mailto:habanolewis@gmail.com" aria-label="Enviar un email"><i class="bi bi-envelope-at" aria-hidden="true"></i></a>
+            </div>
           </div>
 
-          <div class="social-links">
-            <a href="https://www.facebook.com/lewis.habano" target="_blank" rel="noopener" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
-            <a href="https://www.instagram.com/lewishabano/" target="_blank" rel="noopener" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
-            <a href="https://www.linkedin.com/in/lewis-habano-377702239" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a>
-            <a href="https://api.whatsapp.com/send?phone=584126613818&text=Hola%20Lewis%2C%20%C2%BFc%C3%B3mo%20est%C3%A1s%3F" target="_blank" rel="noopener" aria-label="WhatsApp"><i class="bi bi-whatsapp"></i></a>
+          <div class="hero-photo reveal" style="--d:.15s">
+            <div class="photo-frame">
+              <img src="assets/img/PERFIL.PNG" alt="Retrato de Lewis Habano, desarrollador Front End" fetchpriority="high">
+            </div>
+            <div class="float-chip chip-1"><i class="bi bi-code-slash" aria-hidden="true"></i> HTML · CSS · JS</div>
+            <div class="float-chip chip-2"><i class="bi bi-braces" aria-hidden="true"></i> Angular</div>
+            <div class="float-chip chip-3"><i class="bi bi-github" aria-hidden="true"></i> Git · GitHub</div>
           </div>
+
         </div>
 
-        <div class="hero-photo reveal" style="--d:.15s">
-          <div class="photo-ring">
-            <img src="assets/img/PERFIL.PNG" alt="Foto de perfil de Lewis Habano">
-          </div>
-          <div class="float-chip chip-1"><i class="bi bi-code-slash"></i> HTML · CSS · JS</div>
-          <div class="float-chip chip-2"><i class="bi bi-braces"></i> Angular</div>
-          <div class="float-chip chip-3"><i class="bi bi-github"></i> GitHub</div>
-        </div>
-
+        <ul class="hero-stats reveal" style="--d:.2s">
+          <li><span class="count" data-target="8">8</span><p>Proyectos online</p></li>
+          <li><span class="count" data-target="3">3</span><p>Sistemas de citas y pedidos</p></li>
+          <li><span class="count" data-target="6" data-suffix="+">6+</span><p>Cursos y certificados</p></li>
+          <li><span class="count" data-target="4" data-suffix="+">4+</span><p>Años formándome</p></li>
+        </ul>
       </div>
-
-      <a href="#about" class="scroll-hint" aria-label="Bajar a la siguiente sección"><i class="bi bi-chevron-double-down"></i></a>
     </section>
 
-    <!-- ======= About ======= -->
-    <section id="about" class="section">
+    <!-- ======= Proyectos ======= -->
+    <section id="proyectos" class="section">
       <div class="wrap">
         <div class="section-title reveal">
-          <span class="eyebrow">Sobre mí</span>
-          <h2>Un desarrollador en <span class="grad">constante formación</span></h2>
+          <span class="eyebrow">Proyectos</span>
+          <h2>Trabajo real, <span class="grad">online y funcionando</span></h2>
+          <p class="section-lead">Cada proyecto está publicado y se puede probar. Elegí una categoría o mirá todos.</p>
         </div>
 
-        <div class="about-grid">
-          <div class="about-text reveal">
-            <h3>Junior Front-End Developer</h3>
-            <p>
-              Me inicié en el mundo del desarrollo web de la mano de <strong>Argentina Programa</strong>,
-              <strong>#SeProgramar</strong> y otros programas, descubriendo que tengo habilidad para comprender
-              y manejar las herramientas del Front End.
-            </p>
-            <p>
-              Hoy combino lo aprendido con proyectos reales para negocios: sitios institucionales,
-              tiendas online y sistemas de turnos.
-            </p>
+        <div class="filters reveal" role="group" aria-label="Filtrar proyectos por categoría">
+          <button class="filter active" data-filter="all" aria-pressed="true">Todos</button>
+          <button class="filter" data-filter="citas" aria-pressed="false">Citas y pedidos</button>
+          <button class="filter" data-filter="restaurante" aria-pressed="false">Restaurantes</button>
+          <button class="filter" data-filter="tienda" aria-pressed="false">Tiendas</button>
+          <button class="filter" data-filter="web" aria-pressed="false">Sitios web</button>
+        </div>
 
-            <ul class="info-list">
-              <li><i class="bi bi-cake2"></i><span><strong>Nacimiento:</strong> 29 de abril de 1994 (<span id="age">32</span> años)</span></li>
-              <li><i class="bi bi-flag"></i><span><strong>Nacionalidad:</strong> Venezuela</span></li>
-              <li><i class="bi bi-geo-alt"></i><span><strong>Domicilio:</strong> Buenos Aires, Argentina</span></li>
-              <li><i class="bi bi-envelope"></i><span><strong>Email:</strong> habanolewis@gmail.com</span></li>
-            </ul>
-          </div>
+        <!-- TIP: en cada tarjeta podés sumar una línea con el stack real (ej. Angular, Firebase) y un link a su repositorio de GitHub. -->
+        <div class="projects-grid" id="projectsGrid">
 
-          <div class="stats reveal" style="--d:.1s">
-            <div class="stat">
-              <i class="bi bi-calendar2-check"></i>
-              <span class="count" data-target="4" data-suffix="+">0</span>
-              <p>Años de formación</p>
+          <article class="card project featured" data-cat="citas">
+            <div class="project-top"><i class="bi bi-scissors" aria-hidden="true"></i><span class="tag hot">Destacado · Sistema de citas</span></div>
+            <h3>Barbería BROTHER</h3>
+            <p><span class="k">Qué resuelve</span> Que los clientes reserven su turno sin llamar ni esperar una respuesta.</p>
+            <p><span class="k">Qué hice</span> Sistema de citas online para elegir horario, pensado para usarse desde el celular.</p>
+            <div class="project-links"><a href="https://barberiabrotherbarbershop.vercel.app/" target="_blank" rel="noopener" class="link-arrow">Ver proyecto<span class="sr-only"> Barbería BROTHER</span> <i class="bi bi-arrow-up-right" aria-hidden="true"></i></a></div>
+          </article>
+
+          <article class="card project featured" data-cat="restaurante">
+            <div class="project-top"><i class="bi bi-journal-richtext" aria-hidden="true"></i><span class="tag hot">Destacado · Restaurante</span></div>
+            <h3>Menú digital + panel admin</h3>
+            <p><span class="k">Qué resuelve</span> Que el restaurante actualice su menú por su cuenta, sin tocar código.</p>
+            <p><span class="k">Qué hice</span> Menú digital con un panel de administración con login para gestionar el contenido.</p>
+            <div class="project-links">
+              <a href="https://tiendaonlinelewis.vercel.app/" target="_blank" rel="noopener" class="link-arrow">Ver menú <i class="bi bi-arrow-up-right" aria-hidden="true"></i></a>
+              <a href="https://tiendaonlinelewis.vercel.app/login.html" target="_blank" rel="noopener" class="link-arrow">Panel admin <i class="bi bi-arrow-up-right" aria-hidden="true"></i></a>
             </div>
-            <div class="stat">
-              <i class="bi bi-award"></i>
-              <span class="count" data-target="6">0</span>
-              <p>Cursos y certificados</p>
-            </div>
-            <div class="stat">
-              <i class="bi bi-rocket-takeoff"></i>
-              <span class="count" data-target="8">0</span>
-              <p>Proyectos online</p>
-            </div>
-            <div class="stat">
-              <i class="bi bi-cup-hot"></i>
-              <span class="count" data-target="100" data-suffix="%">0</span>
-              <p>Ganas de aprender</p>
-            </div>
-          </div>
+          </article>
+
+          <article class="card project featured" data-cat="restaurante citas">
+            <div class="project-top"><i class="bi bi-receipt" aria-hidden="true"></i><span class="tag hot">Destacado · Pedidos online</span></div>
+            <h3>Sistema de pedidos</h3>
+            <p><span class="k">Qué resuelve</span> Que el cliente haga su pedido desde el celular, sin llamar.</p>
+            <p><span class="k">Qué hice</span> Sistema de pedidos online para un restaurante con una experiencia de compra simple en móvil.</p>
+            <div class="project-links"><a href="https://restaurante-online-yl.vercel.app/" target="_blank" rel="noopener" class="link-arrow">Ver proyecto<span class="sr-only"> Sistema de pedidos</span> <i class="bi bi-arrow-up-right" aria-hidden="true"></i></a></div>
+          </article>
+
+          <article class="card project" data-cat="citas">
+            <div class="project-top"><i class="bi bi-stars" aria-hidden="true"></i><span class="tag">Sistema de citas</span></div>
+            <h3>Uñas y belleza</h3>
+            <p><span class="k">Qué resuelve</span> La gestión de turnos de una manicurista, sin depender de mensajes sueltos.</p>
+            <p><span class="k">Qué hice</span> Sistema de citas online con diseño cuidado y adaptado a móviles.</p>
+            <div class="project-links"><a href="https://manicuristaestrella.vercel.app/" target="_blank" rel="noopener" class="link-arrow">Ver proyecto<span class="sr-only"> Uñas y belleza</span> <i class="bi bi-arrow-up-right" aria-hidden="true"></i></a></div>
+          </article>
+
+          <article class="card project" data-cat="tienda">
+            <div class="project-top"><i class="bi bi-handbag" aria-hidden="true"></i><span class="tag">Tienda de ropa</span></div>
+            <h3>Catálogo online de ropa</h3>
+            <p><span class="k">Qué resuelve</span> Mostrar los productos con claridad, sobre todo en el celular.</p>
+            <p><span class="k">Qué hice</span> Catálogo online para una tienda de ropa de estilo urbano.</p>
+            <div class="project-links"><a href="https://lewiskateropaestilourbano.vercel.app/" target="_blank" rel="noopener" class="link-arrow">Ver proyecto<span class="sr-only"> Catálogo online de ropa</span> <i class="bi bi-arrow-up-right" aria-hidden="true"></i></a></div>
+          </article>
+
+          <article class="card project" data-cat="web">
+            <div class="project-top"><i class="bi bi-tools" aria-hidden="true"></i><span class="tag">Sitio web</span></div>
+            <h3>Multiservicios Ovañez</h3>
+            <p><span class="k">Qué resuelve</span> Dar a conocer los servicios del negocio y facilitar el contacto.</p>
+            <p><span class="k">Qué hice</span> Sitio web institucional enfocado en mostrar lo que hacen y recibir consultas.</p>
+            <div class="project-links"><a href="https://multiservicios-ova-ez.vercel.app/" target="_blank" rel="noopener" class="link-arrow">Ver proyecto<span class="sr-only"> Multiservicios Ovañez</span> <i class="bi bi-arrow-up-right" aria-hidden="true"></i></a></div>
+          </article>
+
+          <article class="card project" data-cat="web">
+            <div class="project-top"><i class="bi bi-cpu" aria-hidden="true"></i><span class="tag">Sitio web</span></div>
+            <h3>Sinapsit · Tu evolución digital</h3>
+            <p><span class="k">Qué resuelve</span> Presencia digital para negocios y marcas que quieren dar el salto online.</p>
+            <p><span class="k">Qué hice</span> Mi web de servicios, donde presento mi propuesta para llevar negocios a su evolución digital.</p>
+            <div class="project-links"><a href="https://sinapsit-tuevolucion-digital.vercel.app/" target="_blank" rel="noopener" class="link-arrow">Ver proyecto<span class="sr-only"> Sinapsit</span> <i class="bi bi-arrow-up-right" aria-hidden="true"></i></a></div>
+          </article>
+
+          <article class="card project" data-cat="web">
+            <div class="project-top"><i class="bi bi-person-badge" aria-hidden="true"></i><span class="tag">Portafolio</span></div>
+            <h3>Portafolio · Yanioska González</h3>
+            <p><span class="k">Qué resuelve</span> Presentar el trabajo de una profesional de forma clara y ordenada.</p>
+            <p><span class="k">Qué hice</span> Portafolio web profesional a medida.</p>
+            <div class="project-links"><a href="https://portafolioyanioskagonzalez.vercel.app/" target="_blank" rel="noopener" class="link-arrow">Ver proyecto<span class="sr-only"> Portafolio de Yanioska González</span> <i class="bi bi-arrow-up-right" aria-hidden="true"></i></a></div>
+          </article>
+
         </div>
       </div>
     </section>
@@ -172,130 +236,129 @@
       <div class="wrap">
         <div class="section-title reveal">
           <span class="eyebrow">Skills</span>
-          <h2>Tecnologías y <span class="grad">aptitudes</span></h2>
+          <h2>Lo que uso y <span class="grad">lo que sé hacer</span></h2>
         </div>
 
         <div class="skills-grid">
-          <div class="skills-bars">
-            <div class="skill reveal">
-              <div class="skill-head"><span><i class="bi bi-filetype-html"></i> HTML</span><em>95%</em></div>
-              <div class="bar"><div class="bar-fill" data-level="95"></div></div>
-            </div>
-            <div class="skill reveal">
-              <div class="skill-head"><span><i class="bi bi-filetype-css"></i> CSS</span><em>80%</em></div>
-              <div class="bar"><div class="bar-fill" data-level="80"></div></div>
-            </div>
-            <div class="skill reveal">
-              <div class="skill-head"><span><i class="bi bi-filetype-js"></i> JavaScript</span><em>50%</em></div>
-              <div class="bar"><div class="bar-fill" data-level="50"></div></div>
-            </div>
-            <div class="skill reveal">
-              <div class="skill-head"><span><i class="bi bi-triangle"></i> Angular</span><em>40%</em></div>
-              <div class="bar"><div class="bar-fill" data-level="40"></div></div>
-            </div>
-            <div class="skill reveal">
-              <div class="skill-head"><span><i class="bi bi-github"></i> GitHub</span><em>80%</em></div>
-              <div class="bar"><div class="bar-fill" data-level="80"></div></div>
-            </div>
-            <div class="skill reveal">
-              <div class="skill-head"><span><i class="bi bi-database"></i> MySQL</span><em>15%</em></div>
-              <div class="bar"><div class="bar-fill" data-level="15"></div></div>
-            </div>
+          <div class="card skill-card reveal">
+            <h3><span class="lvl lvl-1" aria-hidden="true"></span> Lo uso a diario</h3>
+            <ul class="pills">
+              <li><i class="bi bi-filetype-html" aria-hidden="true"></i> HTML5 semántico</li>
+              <li><i class="bi bi-filetype-css" aria-hidden="true"></i> CSS3 · Flexbox · Grid</li>
+              <li><i class="bi bi-filetype-js" aria-hidden="true"></i> JavaScript</li>
+              <li><i class="bi bi-phone" aria-hidden="true"></i> Diseño responsive</li>
+              <li><i class="bi bi-github" aria-hidden="true"></i> Git y GitHub</li>
+              <li><i class="bi bi-cloud-arrow-up" aria-hidden="true"></i> Deploy en Vercel</li>
+            </ul>
           </div>
 
-          <div class="soft reveal" style="--d:.1s">
-            <h3>Aptitudes</h3>
-            <div class="chips">
-              <span class="chip"><i class="bi bi-people"></i> Trabajo en equipo</span>
-              <span class="chip"><i class="bi bi-flag"></i> Liderazgo</span>
-              <span class="chip"><i class="bi bi-calendar-check"></i> Organizado</span>
-              <span class="chip"><i class="bi bi-palette"></i> Creativo</span>
-              <span class="chip"><i class="bi bi-lightning-charge"></i> Proactivo</span>
-              <span class="chip"><i class="bi bi-emoji-smile"></i> Actitud positiva</span>
-              <span class="chip"><i class="bi bi-chat-left-text"></i> Comunicación</span>
-              <span class="chip"><i class="bi bi-lightbulb"></i> Razonamiento</span>
-            </div>
+          <div class="card skill-card reveal" style="--d:.08s">
+            <h3><span class="lvl lvl-2" aria-hidden="true"></span> Con experiencia en proyectos</h3>
+            <ul class="pills">
+              <li><i class="bi bi-triangle" aria-hidden="true"></i> Angular</li>
+              <li><i class="bi bi-person-lock" aria-hidden="true"></i> Paneles con login</li>
+              <li><i class="bi bi-calendar2-check" aria-hidden="true"></i> Sistemas de citas</li>
+              <li><i class="bi bi-cart3" aria-hidden="true"></i> Pedidos y catálogos online</li>
+            </ul>
           </div>
+
+          <div class="card skill-card reveal" style="--d:.16s">
+            <h3><span class="lvl lvl-3" aria-hidden="true"></span> Nociones y en aprendizaje</h3>
+            <ul class="pills">
+              <li><i class="bi bi-database" aria-hidden="true"></i> MySQL</li>
+              <li><i class="bi bi-cup-hot" aria-hidden="true"></i> Java</li>
+              <li><i class="bi bi-filetype-py" aria-hidden="true"></i> Python</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="soft reveal">
+          <h3>Cómo trabajo</h3>
+          <ul class="pills pills-soft">
+            <li><i class="bi bi-chat-left-text" aria-hidden="true"></i> Comunicación clara con clientes</li>
+            <li><i class="bi bi-people" aria-hidden="true"></i> Trabajo en equipo</li>
+            <li><i class="bi bi-calendar-check" aria-hidden="true"></i> Organizado y responsable</li>
+            <li><i class="bi bi-lightning-charge" aria-hidden="true"></i> Proactivo</li>
+            <li><i class="bi bi-lightbulb" aria-hidden="true"></i> Aprendo rápido</li>
+          </ul>
         </div>
       </div>
     </section>
 
-    <!-- ======= Proyectos ======= -->
-    <section id="proyectos" class="section">
+    <!-- ======= Servicios ======= -->
+    <section id="servicios" class="section">
       <div class="wrap">
         <div class="section-title reveal">
-          <span class="eyebrow">Proyectos</span>
-          <h2>Cosas que he <span class="grad">construido</span></h2>
+          <span class="eyebrow">Servicios</span>
+          <h2>También trabajo <span class="grad">como freelance</span></h2>
+          <p class="section-lead">Si tenés un negocio y necesitás presencia online, esto es lo que puedo armarte.</p>
         </div>
 
-        <div class="filters reveal" role="tablist" aria-label="Filtrar proyectos">
-          <button class="filter active" data-filter="all">Todos</button>
-          <button class="filter" data-filter="web">Sitios web</button>
-          <button class="filter" data-filter="restaurante">Restaurantes</button>
-          <button class="filter" data-filter="tienda">Tiendas</button>
-          <button class="filter" data-filter="citas">Sistemas de citas</button>
+        <div class="services-grid">
+          <article class="card service reveal">
+            <i class="bi bi-window-stack" aria-hidden="true"></i>
+            <h3>Landing page</h3>
+            <p>Una página clara, rápida y pensada para que te escriban por WhatsApp.</p>
+            <a class="link-arrow" href="https://wa.me/584126613828?text=Hola%20Lewis%2C%20me%20interesa%20una%20landing%20page%20para%20mi%20negocio." target="_blank" rel="noopener">Pedir presupuesto <i class="bi bi-arrow-up-right" aria-hidden="true"></i></a>
+          </article>
+
+          <article class="card service reveal" style="--d:.06s">
+            <i class="bi bi-building" aria-hidden="true"></i>
+            <h3>Sitio institucional</h3>
+            <p>Varias secciones para presentar tu negocio, tus servicios y tus datos de contacto.</p>
+            <a class="link-arrow" href="https://wa.me/584126613828?text=Hola%20Lewis%2C%20me%20interesa%20un%20sitio%20web%20para%20mi%20negocio." target="_blank" rel="noopener">Pedir presupuesto <i class="bi bi-arrow-up-right" aria-hidden="true"></i></a>
+          </article>
+
+          <article class="card service reveal" style="--d:.12s">
+            <i class="bi bi-calendar2-check" aria-hidden="true"></i>
+            <h3>Sistema de citas online</h3>
+            <p>Para barberías, salones y consultorios: tus clientes reservan sin llamar.</p>
+            <a class="link-arrow" href="https://wa.me/584126613828?text=Hola%20Lewis%2C%20me%20interesa%20un%20sistema%20de%20citas%20online." target="_blank" rel="noopener">Pedir presupuesto <i class="bi bi-arrow-up-right" aria-hidden="true"></i></a>
+          </article>
+
+          <article class="card service reveal" style="--d:.18s">
+            <i class="bi bi-receipt" aria-hidden="true"></i>
+            <h3>Menú digital y pedidos</h3>
+            <p>Menú que vos mismo actualizás y pedidos online desde el celular.</p>
+            <a class="link-arrow" href="https://wa.me/584126613828?text=Hola%20Lewis%2C%20me%20interesa%20un%20men%C3%BA%20digital%20con%20pedidos." target="_blank" rel="noopener">Pedir presupuesto <i class="bi bi-arrow-up-right" aria-hidden="true"></i></a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======= About ======= -->
+    <section id="about" class="section">
+      <div class="wrap">
+        <div class="section-title reveal">
+          <span class="eyebrow">Sobre mí</span>
+          <h2>Un junior que <span class="grad">ya entrega proyectos</span></h2>
         </div>
 
-        <div class="projects-grid" id="projectsGrid">
+        <div class="about-grid">
+          <div class="about-text reveal">
+            <p>
+              Soy Lewis, desarrollador Front End junior en Buenos Aires. Me formé con
+              <strong>Argentina Programa</strong>, <strong>#SeProgramar</strong>, <strong>Buenos Aires Aprende</strong>
+              y otros programas, y desde entonces armo proyectos reales para negocios: sitios institucionales,
+              catálogos, menús digitales y sistemas de citas y pedidos.
+            </p>
+            <p>
+              Vengo de trabajos de trato diario con clientes y soporte técnico (encargado de un ciber,
+              técnico en reparación de celulares y hoy delivery), así que entiendo lo que necesita el dueño
+              de un negocio y cómo lo vive la persona que usa el sitio.
+            </p>
+            <p>
+              Busco mi primera posición como <strong>Front End Developer</strong>: quiero aportar interfaces
+              cuidadas y responsivas, trabajar en equipo y seguir creciendo.
+            </p>
+          </div>
 
-
-          <article class="card project" data-cat="web">
-            <div class="project-top"><i class="bi bi-cpu"></i><span class="tag">Sitio web</span></div>
-            <h3>Sinapsit · Tu evolución digital</h3>
-            <p>Mi web personal y de servicios: mi propuesta para llevar negocios y marcas a su evolución digital.</p>
-            <div class="project-links"><a href="https://sinapsit-tuevolucion-digital.vercel.app/" target="_blank" rel="noopener" class="link-arrow">Ver proyecto <i class="bi bi-arrow-up-right"></i></a></div>
-          </article>
-
-          <article class="card project" data-cat="web">
-            <div class="project-top"><i class="bi bi-tools"></i><span class="tag">Sitio web</span></div>
-            <h3>Multiservicios Ovañez</h3>
-            <p>Página web para un negocio de servicios, pensada para mostrar lo que hacen y facilitar el contacto.</p>
-            <div class="project-links"><a href="https://multiservicios-ova-ez.vercel.app/" target="_blank" rel="noopener" class="link-arrow">Ver proyecto <i class="bi bi-arrow-up-right"></i></a></div>
-          </article>
-
-          <article class="card project" data-cat="restaurante">
-            <div class="project-top"><i class="bi bi-journal-richtext"></i><span class="tag">Restaurante</span></div>
-            <h3>Menú y administrador</h3>
-            <p>Menú digital para restaurante con panel de administración para gestionar el contenido.</p>
-            <div class="project-links"><a href="https://tiendaonlinelewis.vercel.app/" target="_blank" rel="noopener" class="link-arrow">Ver menú <i class="bi bi-arrow-up-right"></i></a><a href="https://tiendaonlinelewis.vercel.app/login.html" target="_blank" rel="noopener" class="link-arrow">Panel admin <i class="bi bi-arrow-up-right"></i></a></div>
-          </article>
-
-          <article class="card project" data-cat="restaurante">
-            <div class="project-top"><i class="bi bi-receipt"></i><span class="tag">Restaurante</span></div>
-            <h3>Sistema de pedidos</h3>
-            <p>Sistema de pedidos online para restaurante, con una experiencia de compra sencilla desde el celular.</p>
-            <div class="project-links"><a href="https://restaurante-online-yl.vercel.app/" target="_blank" rel="noopener" class="link-arrow">Ver proyecto <i class="bi bi-arrow-up-right"></i></a></div>
-          </article>
-
-          <article class="card project" data-cat="tienda">
-            <div class="project-top"><i class="bi bi-handbag"></i><span class="tag">Tienda de ropa</span></div>
-            <h3>Catálogo online de ropa</h3>
-            <p>Catálogo online para una tienda de ropa de estilo urbano, ideal para mostrar productos en el móvil.</p>
-            <div class="project-links"><a href="https://lewiskateropaestilourbano.vercel.app/" target="_blank" rel="noopener" class="link-arrow">Ver proyecto <i class="bi bi-arrow-up-right"></i></a></div>
-          </article>
-
-          <article class="card project" data-cat="citas">
-            <div class="project-top"><i class="bi bi-scissors"></i><span class="tag">Sistema de citas</span></div>
-            <h3>Barbería BROTHER</h3>
-            <p>Sistema de citas online para una barbería, para que los clientes reserven su horario sin llamar.</p>
-            <div class="project-links"><a href="https://barberiabrotherbarbershop.vercel.app/" target="_blank" rel="noopener" class="link-arrow">Ver proyecto <i class="bi bi-arrow-up-right"></i></a></div>
-          </article>
-
-          <article class="card project" data-cat="citas">
-            <div class="project-top"><i class="bi bi-stars"></i><span class="tag">Sistema de citas</span></div>
-            <h3>Uñas y belleza</h3>
-            <p>Sistema de citas online para una manicurista, con un diseño cuidado y adaptado a móviles.</p>
-            <div class="project-links"><a href="https://manicuristaestrella.vercel.app/" target="_blank" rel="noopener" class="link-arrow">Ver proyecto <i class="bi bi-arrow-up-right"></i></a></div>
-          </article>
-
-          <article class="card project" data-cat="web">
-            <div class="project-top"><i class="bi bi-person-badge"></i><span class="tag">Portafolio</span></div>
-            <h3>Portafolio · Yanioska González</h3>
-            <p>Portafolio web profesional creado para Yanioska González.</p>
-            <div class="project-links"><a href="https://portafolioyanioskagonzalez.vercel.app/" target="_blank" rel="noopener" class="link-arrow">Ver proyecto <i class="bi bi-arrow-up-right"></i></a></div>
-          </article>
-
-
+          <ul class="info-list reveal" style="--d:.1s">
+            <li><i class="bi bi-bullseye" aria-hidden="true"></i><span><strong>Busco:</strong> posición Front End Junior (empleo o freelance)</span></li>
+            <li><i class="bi bi-geo-alt" aria-hidden="true"></i><span><strong>Ubicación:</strong> Buenos Aires, Argentina</span></li>
+            <li><i class="bi bi-envelope-at" aria-hidden="true"></i><span><strong>Email:</strong> habanolewis@gmail.com</span></li>
+            <li><i class="bi bi-whatsapp" aria-hidden="true"></i><span><strong>WhatsApp:</strong> +58 412-6613828</span></li>
+          </ul>
         </div>
       </div>
     </section>
@@ -305,26 +368,52 @@
       <div class="wrap">
         <div class="section-title reveal">
           <span class="eyebrow">Trayectoria</span>
-          <h2>Formación y <span class="grad">experiencia</span></h2>
+          <h2>Experiencia y <span class="grad">formación</span></h2>
         </div>
 
-        <div class="tabs reveal" role="tablist">
-          <button class="tab active" data-tab="formacion" role="tab" aria-selected="true"><i class="bi bi-mortarboard"></i> Formación</button>
-          <button class="tab" data-tab="experiencia" role="tab" aria-selected="false"><i class="bi bi-briefcase"></i> Experiencia</button>
+        <div class="tabs reveal" role="tablist" aria-label="Experiencia o formación">
+          <button class="tab active" id="tabbtn-experiencia" data-tab="experiencia" role="tab" aria-selected="true" aria-controls="tab-experiencia"><i class="bi bi-briefcase" aria-hidden="true"></i> Experiencia</button>
+          <button class="tab" id="tabbtn-formacion" data-tab="formacion" role="tab" aria-selected="false" aria-controls="tab-formacion" tabindex="-1"><i class="bi bi-mortarboard" aria-hidden="true"></i> Formación</button>
+        </div>
+
+        <!-- Experiencia -->
+        <div class="tab-panel active" id="tab-experiencia" role="tabpanel" aria-labelledby="tabbtn-experiencia">
+          <div class="timeline">
+            <div class="t-item">
+              <span class="t-date">Actualmente</span>
+              <h4>Desarrollador Front End freelance</h4>
+              <p class="t-org">Proyectos propios y para clientes</p>
+              <ul>
+                <li>Sitios institucionales, catálogos, menús digitales y portafolios para negocios y profesionales.</li>
+                <li>Sistemas de citas y pedidos online pensados para usarse desde el celular.</li>
+                <li>Publicación de cada proyecto en Vercel.</li>
+              </ul>
+            </div>
+            <div class="t-item">
+              <span class="t-date">Actualmente</span>
+              <h4>Servicio de delivery</h4>
+              <p class="t-org">PedidosYa</p>
+            </div>
+            <div class="t-item">
+              <span class="t-date">2017 – 2019</span>
+              <h4>Encargado</h4>
+              <p class="t-org">Computadoras Villa Ciber</p>
+            </div>
+          </div>
         </div>
 
         <!-- Formación -->
-        <div class="tab-panel active" id="tab-formacion">
+        <div class="tab-panel" id="tab-formacion" role="tabpanel" aria-labelledby="tabbtn-formacion" hidden>
           <div class="timeline">
 
-            <div class="t-item reveal">
+            <div class="t-item">
               <span class="t-date">2023 – 2024</span>
               <h4>Front End Python</h4>
               <p class="t-org">Buenos Aires Aprende</p>
-              <a class="link-arrow" href="https://drive.google.com/file/d/17as2-qM0kWx8i5BfHSvtpjqzDdLJUKqA/view?usp=sharing" target="_blank" rel="noopener">Certificado de asistencia <i class="bi bi-arrow-up-right"></i></a>
+              <a class="link-arrow" href="https://drive.google.com/file/d/17as2-qM0kWx8i5BfHSvtpjqzDdLJUKqA/view?usp=sharing" target="_blank" rel="noopener">Certificado de asistencia <i class="bi bi-arrow-up-right" aria-hidden="true"></i></a>
             </div>
 
-            <div class="t-item reveal">
+            <div class="t-item">
               <span class="t-date">2022 – 2023</span>
               <h4>Perfil Web Full Stack Junior</h4>
               <p class="t-org">Argentina Programa 4.0</p>
@@ -333,62 +422,46 @@
                 <li>Front End: HTML, CSS, JS, Angular</li>
                 <li>Back End: MySQL, Apache, Java</li>
               </ul>
-              <a class="link-arrow" href="https://drive.google.com/file/d/1rVg6Ap0BTwlaawiFCQzznwk058b0-l4C/view?usp=sharing" target="_blank" rel="noopener">Ver certificado <i class="bi bi-arrow-up-right"></i></a>
+              <a class="link-arrow" href="https://drive.google.com/file/d/1rVg6Ap0BTwlaawiFCQzznwk058b0-l4C/view?usp=sharing" target="_blank" rel="noopener">Ver certificado <i class="bi bi-arrow-up-right" aria-hidden="true"></i></a>
             </div>
 
-            <div class="t-item reveal">
+            <div class="t-item">
               <span class="t-date">2022 – 2023</span>
               <h4>Primeros pasos del Desarrollo Front End</h4>
               <p class="t-org">Argentina Programa 4.0</p>
               <ul>
                 <li>Proyecto: CV (HTML, CSS, JS)</li>
               </ul>
-              <a class="link-arrow" href="https://drive.google.com/file/d/1SW0rii6lMbcmuUAonAoMLyuNVWkDjXnk/view?usp=sharing" target="_blank" rel="noopener">Ver certificado <i class="bi bi-arrow-up-right"></i></a>
+              <a class="link-arrow" href="https://drive.google.com/file/d/1SW0rii6lMbcmuUAonAoMLyuNVWkDjXnk/view?usp=sharing" target="_blank" rel="noopener">Ver certificado <i class="bi bi-arrow-up-right" aria-hidden="true"></i></a>
             </div>
 
-            <div class="t-item reveal">
+            <div class="t-item">
               <span class="t-date">2022 – 2023</span>
               <h4>JavaScript desde 0</h4>
               <p class="t-org">Educación IT</p>
-              <a class="link-arrow" href="https://drive.google.com/file/d/1VRG9s3bbCekZhndcI7haui48GEvfE5Lh/view?usp=sharing" target="_blank" rel="noopener">Certificado de asistencia <i class="bi bi-arrow-up-right"></i></a>
+              <a class="link-arrow" href="https://drive.google.com/file/d/1VRG9s3bbCekZhndcI7haui48GEvfE5Lh/view?usp=sharing" target="_blank" rel="noopener">Certificado de asistencia <i class="bi bi-arrow-up-right" aria-hidden="true"></i></a>
             </div>
 
-            <div class="t-item reveal">
+            <div class="t-item">
               <span class="t-date">2022</span>
               <h4>Primera etapa del Plan Argentina Programa</h4>
               <p class="t-org">#SeProgramar</p>
-              <a class="link-arrow" href="https://drive.google.com/file/d/1zNKupKRDNCVyyF5Mv7-H7qVzkGOO1lGe/view?usp=sharing" target="_blank" rel="noopener">Ver certificado <i class="bi bi-arrow-up-right"></i></a>
+              <a class="link-arrow" href="https://drive.google.com/file/d/1zNKupKRDNCVyyF5Mv7-H7qVzkGOO1lGe/view?usp=sharing" target="_blank" rel="noopener">Ver certificado <i class="bi bi-arrow-up-right" aria-hidden="true"></i></a>
             </div>
 
-            <div class="t-item reveal">
+            <div class="t-item">
               <span class="t-date">2021 – 2022</span>
               <h4>Técnico en Reparación de Celulares</h4>
               <p class="t-org">Instituto de Investigación y Desarrollo Empresario y Social</p>
-              <a class="link-arrow" href="https://drive.google.com/file/d/13NTasGqHN1XZ4F1Yj-0PthsH8KPX1wrH/view?usp=sharing" target="_blank" rel="noopener">Ver certificado <i class="bi bi-arrow-up-right"></i></a>
+              <a class="link-arrow" href="https://drive.google.com/file/d/13NTasGqHN1XZ4F1Yj-0PthsH8KPX1wrH/view?usp=sharing" target="_blank" rel="noopener">Ver certificado <i class="bi bi-arrow-up-right" aria-hidden="true"></i></a>
             </div>
 
-            <div class="t-item reveal">
+            <div class="t-item">
               <span class="t-date">2015 – 2016</span>
               <h4>Bachiller en Ciencias</h4>
               <p class="t-org">Liceo Aimé Bonpland</p>
             </div>
 
-          </div>
-        </div>
-
-        <!-- Experiencia -->
-        <div class="tab-panel" id="tab-experiencia">
-          <div class="timeline">
-            <div class="t-item">
-              <span class="t-date">Actualmente</span>
-              <h4>Servicio de Delivery</h4>
-              <p class="t-org">PedidosYa</p>
-            </div>
-            <div class="t-item">
-              <span class="t-date">2017 – 2019</span>
-              <h4>Encargado</h4>
-              <p class="t-org">Computadoras Villa Ciber</p>
-            </div>
           </div>
         </div>
 
@@ -401,31 +474,31 @@
         <div class="section-title reveal">
           <span class="eyebrow">Contacto</span>
           <h2>¿Trabajamos <span class="grad">juntos?</span></h2>
+          <p class="section-lead">Escribime por el canal que prefieras. Respondo lo antes posible.</p>
         </div>
 
         <div class="contact-grid">
 
           <div class="contact-info reveal">
+            <a class="info-box" href="https://wa.me/584126613828?text=Hola%20Lewis%2C%20vi%20tu%20portafolio%20y%20quisiera%20hablar%20con%20vos." target="_blank" rel="noopener">
+              <i class="bi bi-whatsapp" aria-hidden="true"></i>
+              <div><h3>WhatsApp</h3><p>+58 412-6613828</p></div>
+            </a>
             <a class="info-box" href="mailto:habanolewis@gmail.com">
-              <i class="bi bi-envelope-at"></i>
+              <i class="bi bi-envelope-at" aria-hidden="true"></i>
               <div><h3>Email</h3><p>habanolewis@gmail.com</p></div>
             </a>
-            <a class="info-box" href="tel:+584126613818">
-              <i class="bi bi-telephone"></i>
-              <div><h3>Teléfono</h3><p>+58 412-6613818</p></div>
+            <a class="info-box" href="https://www.linkedin.com/in/lewis-habano-377702239" target="_blank" rel="noopener">
+              <i class="bi bi-linkedin" aria-hidden="true"></i>
+              <div><h3>LinkedIn</h3><p>lewis-habano</p></div>
             </a>
-            <a class="info-box" href="https://api.whatsapp.com/send?phone=584126613818&text=Hola%20Lewis%2C%20%C2%BFc%C3%B3mo%20est%C3%A1s%3F" target="_blank" rel="noopener">
-              <i class="bi bi-whatsapp"></i>
-              <div><h3>WhatsApp</h3><p>Escribime por chat</p></div>
-            </a>
-            <a class="info-box" href="https://www.google.com/maps/search/?api=1&query=Venezuela" target="_blank" rel="noopener">
-              <i class="bi bi-geo-alt"></i>
-              <div><h3>Ubicación</h3><p>Venezuela</p></div>
+            <a class="info-box" href="https://www.google.com/maps/search/?api=1&amp;query=Buenos+Aires+Argentina" target="_blank" rel="noopener">
+              <i class="bi bi-geo-alt" aria-hidden="true"></i>
+              <div><h3>Ubicación</h3><p>Buenos Aires, Argentina</p></div>
             </a>
             <div class="social-links">
-              <a href="https://www.facebook.com/lewis.habano" target="_blank" rel="noopener" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
-              <a href="https://www.instagram.com/lewishabano/" target="_blank" rel="noopener" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
-              <a href="https://www.linkedin.com/in/lewis-habano-377702239" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a>
+              <a href="https://www.instagram.com/lewishabano/" target="_blank" rel="noopener" aria-label="Instagram de Lewis Habano"><i class="bi bi-instagram" aria-hidden="true"></i></a>
+              <a href="https://www.facebook.com/lewis.habano" target="_blank" rel="noopener" aria-label="Facebook de Lewis Habano"><i class="bi bi-facebook" aria-hidden="true"></i></a>
             </div>
           </div>
 
@@ -433,18 +506,21 @@
             <h3>Enviame un mensaje</h3>
             <div class="field">
               <label for="cName">Nombre</label>
-              <input id="cName" name="name" type="text" placeholder="Tu nombre" required>
+              <input id="cName" name="name" type="text" placeholder="Tu nombre" autocomplete="name" required>
             </div>
             <div class="field">
               <label for="cEmail">Email</label>
-              <input id="cEmail" name="email" type="email" placeholder="tu@email.com" required>
+              <input id="cEmail" name="email" type="email" placeholder="tu@email.com" autocomplete="email" required>
             </div>
             <div class="field">
               <label for="cMsg">Mensaje</label>
-              <textarea id="cMsg" name="message" rows="5" placeholder="Contame sobre tu proyecto..." required></textarea>
+              <textarea id="cMsg" name="message" rows="5" placeholder="Contame sobre tu proyecto o la posición..." required></textarea>
             </div>
-            <p class="form-status" id="formStatus" role="status"></p>
-            <button type="submit" class="btn btn-primary btn-block"><i class="bi bi-send"></i> Enviar mensaje</button>
+            <p class="form-status" id="formStatus" role="status" aria-live="polite"></p>
+            <div class="form-actions">
+              <button type="button" class="btn btn-primary" data-send="whatsapp"><i class="bi bi-whatsapp" aria-hidden="true"></i> Enviar por WhatsApp</button>
+              <button type="button" class="btn btn-ghost" data-send="email"><i class="bi bi-send" aria-hidden="true"></i> Enviar por email</button>
+            </div>
           </form>
 
         </div>
@@ -455,14 +531,14 @@
 
   <footer class="footer">
     <div class="wrap footer-inner">
-      <p>© <span id="year">2026</span> Lewis Habano. Todos los derechos reservados.</p>
-      <p class="muted">Hecho con HTML, CSS y JavaScript</p>
+      <p>© <span id="year">2026</span> Lewis Habano · Front End Developer</p>
+      <p class="muted">Diseñado y desarrollado por mí con HTML, CSS y JavaScript</p>
     </div>
   </footer>
 
-  <button class="to-top" id="toTop" aria-label="Volver arriba"><i class="bi bi-arrow-up"></i></button>
+  <button class="to-top" id="toTop" aria-label="Volver arriba"><i class="bi bi-arrow-up" aria-hidden="true"></i></button>
 
-  <script src="assets/js/main.js"></script>
+  <script src="assets/js/main.js" defer></script>
 </body>
 
 </html>

@@ -9,21 +9,13 @@
   const $$ = (sel, root = document) => [...root.querySelectorAll(sel)];
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-  /* ---------- Año y edad automáticos ---------- */
-  const now = new Date();
-  const yearEl = $("#year");
-  if (yearEl) yearEl.textContent = now.getFullYear();
+  // Contacto (WhatsApp sin el signo +, solo números con código de país)
+  const WHATSAPP = "584126613828";
+  const EMAIL = "habanolewis@gmail.com";
 
-  const ageEl = $("#age");
-  if (ageEl) {
-    const birth = new Date(1994, 3, 29); // 29 de abril de 1994
-    let age = now.getFullYear() - birth.getFullYear();
-    const hadBirthday =
-      now.getMonth() > birth.getMonth() ||
-      (now.getMonth() === birth.getMonth() && now.getDate() >= birth.getDate());
-    if (!hadBirthday) age--;
-    ageEl.textContent = age;
-  }
+  /* ---------- Año automático ---------- */
+  const yearEl = $("#year");
+  if (yearEl) yearEl.textContent = new Date().getFullYear();
 
   /* ---------- Menú móvil ---------- */
   const navbar = $("#navbar");
@@ -33,13 +25,12 @@
     navbar.classList.toggle("open", open);
     menuToggle.classList.toggle("open", open);
     menuToggle.setAttribute("aria-expanded", String(open));
-    // Se bloquea el scroll desde <html> (no desde <body>) para no alterar el fondo fijo
+    menuToggle.setAttribute("aria-label", open ? "Cerrar menú" : "Abrir menú");
     document.documentElement.classList.toggle("menu-open", open);
   };
   menuToggle.addEventListener("click", () => setMenu(!navbar.classList.contains("open")));
   $$(".nav-link").forEach((a) => a.addEventListener("click", () => setMenu(false)));
   document.addEventListener("keydown", (e) => { if (e.key === "Escape") setMenu(false); });
-  // Si se agranda la pantalla con el menú abierto, se cierra solo
   window.addEventListener("resize", () => { if (window.innerWidth > 991) setMenu(false); });
 
   /* ---------- Scroll: header, progreso, volver arriba ---------- */
@@ -56,7 +47,7 @@
   };
   window.addEventListener("scroll", onScroll, { passive: true });
   onScroll();
-  toTop.addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
+  toTop.addEventListener("click", () => window.scrollTo({ top: 0, behavior: reduceMotion ? "auto" : "smooth" }));
 
   /* ---------- Enlace activo según la sección visible ---------- */
   const links = $$(".nav-link");
@@ -67,7 +58,11 @@
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            links.forEach((l) => l.classList.toggle("active", l.getAttribute("href") === "#" + entry.target.id));
+            links.forEach((l) => {
+              const on = l.getAttribute("href") === "#" + entry.target.id;
+              l.classList.toggle("active", on);
+              if (on) l.setAttribute("aria-current", "true"); else l.removeAttribute("aria-current");
+            });
           }
         });
       },
@@ -76,12 +71,12 @@
     sections.forEach((s) => navObserver.observe(s));
   }
 
-  /* ---------- Animación de entrada (reveal) + barras + contadores ---------- */
+  /* ---------- Animación de entrada (reveal) + contadores ---------- */
   const animateCount = (el) => {
     const target = +el.dataset.target;
     const suffix = el.dataset.suffix || "";
     if (reduceMotion) { el.textContent = target + suffix; return; }
-    const duration = 1400;
+    const duration = 1200;
     const start = performance.now();
     const tick = (t) => {
       const p = Math.min((t - start) / duration, 1);
@@ -100,7 +95,6 @@
           if (!entry.isIntersecting) return;
           const el = entry.target;
           el.classList.add("in");
-          $$(".bar-fill", el).forEach((b) => (b.style.width = b.dataset.level + "%"));
           $$(".count", el).forEach(animateCount);
           obs.unobserve(el);
         });
@@ -109,45 +103,45 @@
     );
     revealItems.forEach((el) => io.observe(el));
   } else {
-    // Navegadores muy antiguos: mostrar todo
+    // Navegadores muy antiguos: mostrar todo con los números finales
     revealItems.forEach((el) => el.classList.add("in"));
-    $$(".bar-fill").forEach((b) => (b.style.width = b.dataset.level + "%"));
-    $$(".count").forEach(animateCount);
   }
 
   /* ---------- Efecto de escritura en el hero ---------- */
   const typedEl = $("#typed");
-  if (typedEl) {
-    const words = ["Front End Developer", "Creador de sitios web", "Apasionado por aprender", "Junior con ganas de crecer"];
-    if (reduceMotion) {
-      typedEl.textContent = words[0];
-    } else {
-      let w = 0, c = 0, deleting = false;
-      const type = () => {
-        const word = words[w];
-        typedEl.textContent = word.slice(0, c);
-        let delay = deleting ? 40 : 85;
-        if (!deleting && c === word.length) { delay = 1800; deleting = true; }
-        else if (deleting && c === 0) { deleting = false; w = (w + 1) % words.length; delay = 400; }
-        c += deleting ? -1 : 1;
-        // evita pasarse de rango tras el cambio de estado
-        c = Math.max(0, Math.min(c, word.length));
-        setTimeout(type, delay);
-      };
-      type();
-    }
+  if (typedEl && !reduceMotion) {
+    const words = [
+      "Desarrollador Front End Junior",
+      "Sitios web para negocios reales",
+      "Sistemas de citas y pedidos",
+      "HTML · CSS · JavaScript · Angular"
+    ];
+    let w = 0, c = 0, deleting = false;
+    const type = () => {
+      const word = words[w];
+      typedEl.textContent = word.slice(0, c);
+      let delay = deleting ? 35 : 75;
+      if (!deleting && c === word.length) { delay = 2000; deleting = true; }
+      else if (deleting && c === 0) { deleting = false; w = (w + 1) % words.length; delay = 400; }
+      c += deleting ? -1 : 1;
+      c = Math.max(0, Math.min(c, word.length));
+      setTimeout(type, delay);
+    };
+    type();
   }
 
-  /* ---------- Filtro de proyectos ---------- */
+  /* ---------- Filtro de proyectos (una tarjeta puede tener varias categorías) ---------- */
   const filterBtns = $$(".filter");
   const projects = $$(".project");
   filterBtns.forEach((btn) => {
     btn.addEventListener("click", () => {
-      filterBtns.forEach((b) => b.classList.remove("active"));
+      filterBtns.forEach((b) => { b.classList.remove("active"); b.setAttribute("aria-pressed", "false"); });
       btn.classList.add("active");
+      btn.setAttribute("aria-pressed", "true");
       const f = btn.dataset.filter;
       projects.forEach((p) => {
-        const show = f === "all" || p.dataset.cat === f;
+        const cats = (p.dataset.cat || "").split(/\s+/);
+        const show = f === "all" || cats.includes(f);
         p.classList.toggle("hide", !show);
         if (show) {
           p.classList.remove("pop");
@@ -158,75 +152,65 @@
     });
   });
 
-  /* ---------- Pestañas Formación / Experiencia ---------- */
-  $$(".tab").forEach((tab) => {
-    tab.addEventListener("click", () => {
-      $$(".tab").forEach((t) => { t.classList.remove("active"); t.setAttribute("aria-selected", "false"); });
-      $$(".tab-panel").forEach((p) => p.classList.remove("active"));
-      tab.classList.add("active");
-      tab.setAttribute("aria-selected", "true");
-      const panel = $("#tab-" + tab.dataset.tab);
-      panel.classList.add("active");
-      $$(".reveal", panel).forEach((el) => el.classList.add("in"));
+  /* ---------- Pestañas Experiencia / Formación (con teclado) ---------- */
+  const tabs = $$(".tab");
+  const selectTab = (tab, focus) => {
+    tabs.forEach((t) => {
+      const on = t === tab;
+      t.classList.toggle("active", on);
+      t.setAttribute("aria-selected", String(on));
+      t.tabIndex = on ? 0 : -1;
+      const panel = $("#tab-" + t.dataset.tab);
+      panel.classList.toggle("active", on);
+      panel.hidden = !on;
+    });
+    if (focus) tab.focus();
+  };
+  tabs.forEach((tab, i) => {
+    tab.addEventListener("click", () => selectTab(tab, false));
+    tab.addEventListener("keydown", (e) => {
+      if (e.key === "ArrowRight") { e.preventDefault(); selectTab(tabs[(i + 1) % tabs.length], true); }
+      if (e.key === "ArrowLeft") { e.preventDefault(); selectTab(tabs[(i - 1 + tabs.length) % tabs.length], true); }
     });
   });
 
-  /* ---------- Efecto 3D (tilt) en tarjetas de proyecto — solo con mouse ---------- */
-  const canHover = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
-  if (canHover && !reduceMotion) {
-    projects.forEach((card) => {
-      card.addEventListener("mousemove", (e) => {
-        const r = card.getBoundingClientRect();
-        const x = (e.clientX - r.left) / r.width - 0.5;
-        const y = (e.clientY - r.top) / r.height - 0.5;
-        card.style.transform = `perspective(900px) rotateX(${(-y * 7).toFixed(2)}deg) rotateY(${(x * 7).toFixed(2)}deg) translateY(-4px)`;
-      });
-      card.addEventListener("mouseleave", () => { card.style.transform = ""; });
-    });
-
-    /* Brillo que sigue al cursor */
-    const glow = $("#cursorGlow");
-    let raf = null, mx = 0, my = 0;
-    window.addEventListener("mousemove", (e) => {
-      mx = e.clientX; my = e.clientY;
-      glow.style.opacity = 1;
-      if (!raf) raf = requestAnimationFrame(() => {
-        glow.style.transform = `translate(${mx}px, ${my}px)`;
-        raf = null;
-      });
-    });
-    document.addEventListener("mouseleave", () => (glow.style.opacity = 0));
-  }
-
-  /* ---------- Formulario de contacto (abre tu app de correo) ---------- */
+  /* ---------- Formulario de contacto: WhatsApp o email ---------- */
   const form = $("#contactForm");
   const status = $("#formStatus");
-  if (form) {
-    form.addEventListener("submit", (e) => {
-      e.preventDefault();
-      const name = form.name.value.trim();
-      const email = form.email.value.trim();
-      const message = form.message.value.trim();
-      const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 
-      $$(".field", form).forEach((f) => f.classList.remove("invalid"));
-      if (!name) form.name.closest(".field").classList.add("invalid");
-      if (!emailOk) form.email.closest(".field").classList.add("invalid");
-      if (!message) form.message.closest(".field").classList.add("invalid");
+  const send = (channel) => {
+    const name = form.name.value.trim();
+    const email = form.email.value.trim();
+    const message = form.message.value.trim();
+    const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 
-      if (!name || !emailOk || !message) {
-        status.className = "form-status err";
-        status.textContent = "Por favor completá todos los campos con un email válido.";
-        return;
-      }
+    $$(".field", form).forEach((f) => f.classList.remove("invalid"));
+    if (!name) form.name.closest(".field").classList.add("invalid");
+    if (!emailOk) form.email.closest(".field").classList.add("invalid");
+    if (!message) form.message.closest(".field").classList.add("invalid");
 
+    if (!name || !emailOk || !message) {
+      status.className = "form-status err";
+      status.textContent = "Por favor completá todos los campos con un email válido.";
+      return;
+    }
+
+    if (channel === "whatsapp") {
+      const text = `Hola Lewis, soy ${name} (${email}).\n\n${message}`;
+      window.open(`https://wa.me/${WHATSAPP}?text=${encodeURIComponent(text)}`, "_blank", "noopener");
+      status.textContent = "¡Listo! Se abrió WhatsApp con tu mensaje, solo falta enviarlo.";
+    } else {
       const subject = encodeURIComponent("Contacto desde tu portafolio - " + name);
       const body = encodeURIComponent(`Nombre: ${name}\nEmail: ${email}\n\n${message}`);
-      window.location.href = `mailto:habanolewis@gmail.com?subject=${subject}&body=${body}`;
-
-      status.className = "form-status ok";
+      window.location.href = `mailto:${EMAIL}?subject=${subject}&body=${body}`;
       status.textContent = "¡Listo! Se abrirá tu app de correo para enviar el mensaje.";
-      form.reset();
-    });
+    }
+    status.className = "form-status ok";
+    form.reset();
+  };
+
+  if (form) {
+    $$("[data-send]", form).forEach((btn) => btn.addEventListener("click", () => send(btn.dataset.send)));
+    form.addEventListener("submit", (e) => { e.preventDefault(); send("whatsapp"); });
   }
 })();
